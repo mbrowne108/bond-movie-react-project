@@ -58,7 +58,6 @@ body {
 }
 
 .lists {
-  text-align: center;
   border: rgb(0, 0, 0) solid 1px;
   padding: 1rem;
   width: 20rem;
@@ -68,17 +67,27 @@ body {
   box-shadow: 3px 4px #3b3b3b
 }
 
-button {
+.lists li {
+  display: inline-block;
+}
+
+.lists button {
+  float: right;
+  background-color: #ff000d;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+}
+
+.button {
+  display: inline-block;
   position: relative;
   background-color: #ff000d;
+  color: rgb(255, 255, 255);
   border-radius: 5px;
   height: 2rem;
   width: max-content;
-  color: rgb(255, 255, 255);
-  font-size: 14px;
   justify-self: center;
 }
-
 
 button:hover {
   background-color: rgb(255, 255, 255);
@@ -99,4 +108,21 @@ button:hover {
   height: auto;
   width: 8rem;
   margin: 1rem 1rem;
+}
+
+.info-button {
+  display: inline-block;
+  position: relative;
+  font-size: 14px;
+  background: #ff000d;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding: 10px;
+  justify-self: center;
+  margin: 1rem 1rem
+}
+
+.info-button:hover {
+  background-color: rgb(255, 255, 255);
+  color: #ff000d;
 }

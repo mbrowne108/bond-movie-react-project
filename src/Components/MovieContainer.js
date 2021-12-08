@@ -11,11 +11,13 @@ function MovieContainer() {
   const [filteredActor, setFilteredActor] = useState('')
   const [filteredDecade, setFilteredDecade] = useState(0)
 
+  const displayCard = 
+
   useEffect(() => {
     fetch('http://localhost:3004/movies')
     .then(r => r.json())
     .then(data => setMovies(data))
-  },[movies])
+  },[])
 
   function handleActorChange(e) {
     setFilteredActor(e.target.value)
@@ -27,6 +29,28 @@ function MovieContainer() {
 
   function handleFilmPage(id) {
     setClickedId(id)
+  }
+
+  function onUpdateWatch(updatedMovie) {
+    let updatedMovies = movies.map((movie) => {
+      if (movie.id === updatedMovie.id) {
+        return updatedMovie
+      } else {
+        return movie
+      }
+    })
+    setMovies(updatedMovies)
+  }
+
+  function onUpdateWant(updatedMovie) {
+    let updatedMovies = movies.map((movie) => {
+      if (movie.id === updatedMovie.id) {
+        return updatedMovie
+      } else {
+        return movie
+      }
+    })
+    setMovies(updatedMovies)
   }
 
   return (
@@ -51,38 +75,38 @@ function MovieContainer() {
             <option value={2000}>2000's</option>
             <option value={2010}>2010's</option>
           </select><br/>
-          {movies.map((movie) => 
-            {if (filteredDecade == "" && filteredActor == "") {
-              return (
-                <MovieCard 
-                  title={movie.Movie} 
-                  key={movie.id} 
-                  year={movie.Year} 
-                  id={movie.id}
-                  watched={movie.Watched}
-                  wantToWatch={movie.Want_To_Watch}
-                  handleFilmPage={handleFilmPage}/>
-              )
+          {movies.map((movie) =>
+            {const displayCard = 
+              <MovieCard 
+                title={movie.Movie} 
+                key={movie.id} 
+                year={movie.Year} 
+                id={movie.id}
+                watched={movie.Watched}
+                wantToWatch={movie.Want_To_Watch}
+                handleFilmPage={handleFilmPage}
+                onUpdateWant={onUpdateWant}
+                onUpdateWatch={onUpdateWatch}
+              />
+            if (filteredDecade == "" && filteredActor == "") {
+              return displayCard
+            } else if (movie.Bond === filteredActor && filteredDecade == "") {
+              return displayCard
+            } else if (filteredActor == "" && filteredDecade <= movie.Year && filteredDecade + 10 > movie.Year) {
+              return displayCard
             } else if (movie.Bond === filteredActor && filteredDecade <= movie.Year && filteredDecade + 10 > movie.Year) {
-              
-              return (
-                <MovieCard 
-                  title={movie.Movie} 
-                  key={movie.id} 
-                  year={movie.Year} 
-                  id={movie.id}
-                  watched={movie.Watched}
-                  wantToWatch={movie.Want_To_Watch}
-                  handleFilmPage={handleFilmPage}/>
-              )
+              return displayCard
             } else return null
           })}
         </Route>
         <Route exact path="/lists">
-          <MovieLists movies={movies}/>
+          <MovieLists 
+            movies={movies} 
+            onUpdateWant={onUpdateWant} 
+            onUpdateWatch={onUpdateWatch}/>
         </Route>
         <Route path={clickedId}>
-          <MovieInfo movie={movies[clickedId]} />
+          <MovieInfo movie={movies[clickedId]} handleFilmPage={handleFilmPage}/>
         </Route>
       </Switch>
     </div>

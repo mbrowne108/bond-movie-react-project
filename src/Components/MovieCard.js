@@ -13,6 +13,7 @@ function MovieCard(props) {
       }),
     })
       .then(r => r.json())
+      .then((updatedMovie) => props.onUpdateWatch(updatedMovie))
   }
 
   function handleWantToWatch() {
@@ -26,6 +27,7 @@ function MovieCard(props) {
       }),
     })
       .then(r => r.json())
+      .then((updatedMovie) => props.onUpdateWant(updatedMovie))
   }
 
   function onLink() {
