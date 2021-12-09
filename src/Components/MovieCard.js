@@ -30,13 +30,9 @@ function MovieCard(props) {
       .then((updatedMovie) => props.onUpdateWant(updatedMovie))
   }
 
-  function onLink() {
-    props.handleFilmPage(props.id)
-  }
-
   return (
     <div className="card">
-      <h4 onClick={onLink}><Link to={`/${props.id}`}>{props.title}</Link></h4>
+      <h4><Link to={`/${props.id}`}>{props.title}</Link></h4>
       <p>{props.year}</p>
       <button className="button" onClick={handleWatched}>Watched? {props.watched ? '☑' : '☐'}</button>
       <button className="button" onClick={handleWantToWatch}>Want to Watch? {props.wantToWatch ? '☑' : '☐'}</button>

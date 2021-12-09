@@ -7,7 +7,6 @@ import MovieInfo from './MovieInfo.js'
 
 function MovieContainer() {
   const [movies, setMovies] = useState([])
-  const [clickedId, setClickedId] = useState(0)
   const [filteredActor, setFilteredActor] = useState('')
   const [filteredDecade, setFilteredDecade] = useState(0)
 
@@ -23,10 +22,6 @@ function MovieContainer() {
 
   function handleDecadeChange(e) {
     setFilteredDecade(Number(e.target.value))
-  }
-
-  function handleFilmPage(id) {
-    setClickedId(id)
   }
 
   function onUpdateWatch(updatedMovie) {
@@ -82,7 +77,6 @@ function MovieContainer() {
                 id={movie.id}
                 watched={movie.Watched}
                 wantToWatch={movie.Want_To_Watch}
-                handleFilmPage={handleFilmPage}
                 onUpdateWant={onUpdateWant}
                 onUpdateWatch={onUpdateWatch}
               />
@@ -103,10 +97,9 @@ function MovieContainer() {
             onUpdateWant={onUpdateWant} 
             onUpdateWatch={onUpdateWatch}/>
         </Route>
-        <Route path={clickedId}>
+        <Route path='/:id'>
           <MovieInfo 
-            movie={movies[clickedId]} 
-            handleFilmPage={handleFilmPage}
+            movies={movies} 
             onUpdateWant={onUpdateWant}
             onUpdateWatch={onUpdateWatch}
           />

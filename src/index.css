@@ -65,6 +65,7 @@ body {
   border: rgb(0, 0, 0) solid 1px;
   padding: 1rem;
   width: 20rem;
+  font-size: 18px;
   height: auto;
   display: inline-grid;
   margin: 2rem 2rem;
