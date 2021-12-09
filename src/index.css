@@ -9,6 +9,10 @@ body {
   font-size: 22px;
 }
 
+#header h1 {
+  color: rgba(255, 255, 255, 0.74);
+}
+
 #nav-bar {
   display: flex;
   justify-content: center;
@@ -31,7 +35,7 @@ body {
 }
 
 .nav-link:hover {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.74);
   color: #ff000d;
 }
 
@@ -90,7 +94,7 @@ body {
 }
 
 button:hover {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.74);
   color: #ff000d;
 }
 
@@ -114,15 +118,15 @@ button:hover {
   display: inline-block;
   position: relative;
   font-size: 14px;
-  background: #ff000d;
-  color: rgb(255, 255, 255);
+  background: #3b3b3b;
+  color: rgba(255, 255, 255, 0.74);
   border-radius: 5px;
   padding: 10px;
   justify-self: center;
-  margin: 1rem 1rem
+  margin: 2rem 9rem
 }
 
 .info-button:hover {
-  background-color: rgb(255, 255, 255);
-  color: #ff000d;
+  background-color: rgba(255, 255, 255, 0.74);
+  color: #3b3b3b;
 }

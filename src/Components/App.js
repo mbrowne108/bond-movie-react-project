@@ -9,7 +9,7 @@ function App() {
       <header id="header">
         <h1>James Bond Movie List</h1>
         <NavBar />
-          <MovieContainer />
+        <MovieContainer />
       </header>
     </div>
   );

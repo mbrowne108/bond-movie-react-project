@@ -11,8 +11,6 @@ function MovieContainer() {
   const [filteredActor, setFilteredActor] = useState('')
   const [filteredDecade, setFilteredDecade] = useState(0)
 
-  const displayCard = 
-
   useEffect(() => {
     fetch('http://localhost:3004/movies')
     .then(r => r.json())
@@ -99,14 +97,19 @@ function MovieContainer() {
             } else return null
           })}
         </Route>
-        <Route exact path="/lists">
+        <Route path="/lists">
           <MovieLists 
             movies={movies} 
             onUpdateWant={onUpdateWant} 
             onUpdateWatch={onUpdateWatch}/>
         </Route>
         <Route path={clickedId}>
-          <MovieInfo movie={movies[clickedId]} handleFilmPage={handleFilmPage}/>
+          <MovieInfo 
+            movie={movies[clickedId]} 
+            handleFilmPage={handleFilmPage}
+            onUpdateWant={onUpdateWant}
+            onUpdateWatch={onUpdateWatch}
+          />
         </Route>
       </Switch>
     </div>
