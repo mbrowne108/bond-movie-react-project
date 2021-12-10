@@ -25,7 +25,7 @@ function MovieContainer({movies, onUpdateWant, onUpdateWatch}) {
         <option value="Daniel Craig">Daniel Craig</option>
       </select>
       <select onChange={handleDecadeChange}>
-        <option value="">Filter by Decade...</option>
+        <option value={0}>Filter by Decade...</option>
         <option value={1960}>1960's</option>
         <option value={1970}>1970's</option>
         <option value={1980}>1980's</option>
@@ -35,11 +35,11 @@ function MovieContainer({movies, onUpdateWant, onUpdateWatch}) {
       </select><br/>
       {movies.map((movie) =>
         {const displayCard = <MovieCard key={movie.id} movie={movie} onUpdateWant={onUpdateWant} onUpdateWatch={onUpdateWatch} />
-        if (filteredDecade == "" && filteredActor == "") {
+        if (filteredDecade === 0 && filteredActor === "") {
           return displayCard
-        } else if (movie.Bond === filteredActor && filteredDecade == "") {
+        } else if (movie.Bond === filteredActor && filteredDecade === 0) {
           return displayCard
-        } else if (filteredActor == "" && filteredDecade <= movie.Year && filteredDecade + 10 > movie.Year) {
+        } else if (filteredActor === "" && filteredDecade <= movie.Year && filteredDecade + 10 > movie.Year) {
           return displayCard
         } else if (movie.Bond === filteredActor && filteredDecade <= movie.Year && filteredDecade + 10 > movie.Year) {
           return displayCard

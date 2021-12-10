@@ -17,7 +17,7 @@ function MovieInfo({onUpdateWatch, onUpdateWant}) {
     })
       .then(r => r.json())
       .then((updatedMovie) => onUpdateWatch(updatedMovie))
-  }, [movie, onUpdateWatch])
+  }, [movie.Watched, movie.id, onUpdateWatch])
 
   const handleWantToWatch = useCallback(() => {
     fetch(`http://localhost:3004/movies/${movie.id}`, {
@@ -31,7 +31,7 @@ function MovieInfo({onUpdateWatch, onUpdateWant}) {
     })
       .then(r => r.json())
       .then((updatedMovie) => onUpdateWant(updatedMovie))
-  }, [movie, onUpdateWant])
+  }, [movie.Want_To_Watch, movie.id, onUpdateWant])
 
   useEffect(() => {
     fetch(`http://localhost:3004/movies/${id}`)

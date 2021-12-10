@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
   return (
@@ -11,7 +12,7 @@ function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
               if (movie.Watched) {
                 return (
                   <ul key={movie.id}>
-                    <li>{movie.Movie}</li>
+                    <li><Link to={`/${movie.id}`}>{movie.Movie}</Link></li>
                     <button onClick={() => {
                       fetch(`http://localhost:3004/movies/${movie.id}`, {
                         method: "PATCH",
@@ -38,7 +39,7 @@ function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
               if (movie.Want_To_Watch) {
                 return (
                   <ul key={movie.id}>
-                    <li>{movie.Movie}</li>
+                    <li><Link to={`/${movie.id}`}>{movie.Movie}</Link></li>
                     <button onClick={() => {
                       fetch(`http://localhost:3004/movies/${movie.id}`, {
                         method: "PATCH",
