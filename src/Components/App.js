@@ -1,26 +1,21 @@
 import React, { useState, useEffect} from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import MovieContainer from './MovieContainer.js'
+import About from './About.js'
 import NavBar from './NavBar.js'
+import MovieContainer from './MovieContainer.js'
 import MovieLists from './MovieLists.js'
 import MovieInfo from './MovieInfo.js'
+import NewMovieForm from './NewMovieForm.js'
 
 function App() {
   const [movies, setMovies] = useState([])
 
-  function onUpdateWatch(updatedMovie) {
-    let updatedMovies = movies.map((movie) => {
-      if (movie.id === updatedMovie.id) {
-        return updatedMovie
-      } else {
-        return movie
-      }
-    })
-    setMovies(updatedMovies)
+  function onNewMovie(newMovie) {
+    setMovies(...movies, newMovie)
   }
 
-  function onUpdateWant(updatedMovie) {
+  function onUpdateMovie(updatedMovie) {
     let updatedMovies = movies.map((movie) => {
       if (movie.id === updatedMovie.id) {
         return updatedMovie
@@ -44,13 +39,19 @@ function App() {
         <NavBar />
         <Switch>
           <Route exact path="/">
-            <MovieContainer movies={movies} onUpdateWant={onUpdateWant} onUpdateWatch={onUpdateWatch} />
+            <About />
+          </Route>
+          <Route exact path="/movies">
+            <MovieContainer movies={movies} onUpdateMovie={onUpdateMovie} />
+          </Route>
+          <Route path='/movies/new'>
+            <NewMovieForm onNewMovie={onNewMovie} />
+          </Route>
+          <Route path='/movies/:id'>
+            <MovieInfo movies={movies} onUpdateMovie={onUpdateMovie} />
           </Route>
           <Route path="/lists">
-            <MovieLists movies={movies} onUpdateWant={onUpdateWant} onUpdateWatch={onUpdateWatch} />
-          </Route>
-          <Route path='/:id'>
-            <MovieInfo onUpdateWant={onUpdateWant} onUpdateWatch={onUpdateWatch} />
+            <MovieLists movies={movies} onUpdateMovie={onUpdateMovie} />
           </Route>
         </Switch>
       </header>

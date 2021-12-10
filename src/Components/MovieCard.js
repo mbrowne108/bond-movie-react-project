@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-function MovieCard( {movie, onUpdateWant, onUpdateWatch} ) {
+function MovieCard({ movie, onUpdateMovie }) {
   function handleWatched() {
     fetch(`http://localhost:3004/movies/${movie.id}`, {
       method: "PATCH",
@@ -9,11 +9,11 @@ function MovieCard( {movie, onUpdateWant, onUpdateWatch} ) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        Watched: !movie.Watched
+        watched: !movie.watched
       }),
     })
       .then(r => r.json())
-      .then((updatedMovie) => onUpdateWatch(updatedMovie))
+      .then((updatedMovie) => onUpdateMovie(updatedMovie))
   }
 
   function handleWantToWatch() {
@@ -23,19 +23,19 @@ function MovieCard( {movie, onUpdateWant, onUpdateWatch} ) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        Want_To_Watch: !movie.Want_To_Watch
+        want_to_watch: !movie.want_to_watch
       }),
     })
       .then(r => r.json())
-      .then((updatedMovie) => onUpdateWant(updatedMovie))
+      .then((updatedMovie) => onUpdateMovie(updatedMovie))
   }
 
   return (
     <div className="card">
-      <h4><Link to={`/${movie.id}`}>{movie.Movie}</Link></h4>
-      <p>{movie.Year}</p>
-      <button className="button" onClick={handleWatched}>Watched? {movie.Watched ? '☑' : '☐'}</button>
-      <button className="button" onClick={handleWantToWatch}>Want to Watch? {movie.Want_To_Watch ? '☑' : '☐'}</button>
+      <h4><Link to={`/movies/${movie.id}`}>{movie.movie}</Link></h4>
+      <p>{movie.year}</p>
+      <button className="button" onClick={handleWatched}>Watched? {movie.watched ? '☑' : '☐'}</button>
+      <button className="button" onClick={handleWantToWatch}>Want to Watch? {movie.want_to_watch ? '☑' : '☐'}</button>
     </div>
   );
 }

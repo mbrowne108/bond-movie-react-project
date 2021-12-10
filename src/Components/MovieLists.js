@@ -1,7 +1,35 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
+function MovieLists({ movies, onUpdateMovie }) {
+  function handleWatched(movie) {
+    fetch(`http://localhost:3004/movies/${movie.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        watched: !movie.watched
+      }),
+    })
+      .then(r => r.json())
+      .then((updatedMovie) => onUpdateMovie(updatedMovie))
+  }
+
+  function handleWantToWatch(movie) {
+    fetch(`http://localhost:3004/movies/${movie.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        want_to_watch: !movie.want_to_watch
+      }),
+    })
+      .then(r => r.json())
+      .then((updatedMovie) => onUpdateMovie(updatedMovie))
+  }
+  
   return (
     <div className="container">
       <h2>Your Movie Lists</h2>
@@ -9,23 +37,11 @@ function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
         <h3>Have Seen</h3>
           <ul>
             {movies.map((movie) => {
-              if (movie.Watched) {
+              if (movie.watched) {
                 return (
                   <ul key={movie.id}>
-                    <li><Link to={`/${movie.id}`}>{movie.Movie}</Link></li>
-                    <button onClick={() => {
-                      fetch(`http://localhost:3004/movies/${movie.id}`, {
-                        method: "PATCH",
-                        headers: {
-                          "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                          Watched: !movie.Watched
-                        }),
-                      })
-                        .then(r => r.json())
-                        .then((updatedMovie) => onUpdateWatch(updatedMovie))
-                    }}>X</button>
+                    <li><Link to={`/movies/${movie.id}`}>{movie.movie}</Link></li>
+                    <button onClick={(e) => handleWatched(movie)}>X</button>
                   </ul>
                 )
               } else return null
@@ -36,23 +52,11 @@ function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
         <h3>Want To See</h3>
           <ul>
             {movies.map((movie) => {
-              if (movie.Want_To_Watch) {
+              if (movie.want_to_watch) {
                 return (
                   <ul key={movie.id}>
-                    <li><Link to={`/${movie.id}`}>{movie.Movie}</Link></li>
-                    <button onClick={() => {
-                      fetch(`http://localhost:3004/movies/${movie.id}`, {
-                        method: "PATCH",
-                        headers: {
-                          "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                          Want_To_Watch: !movie.Want_To_Watch
-                        }),
-                      })
-                        .then(r => r.json())
-                        .then((updatedMovie) => onUpdateWant(updatedMovie))
-                    }}>X</button>
+                    <li><Link to={`/movies/${movie.id}`}>{movie.movie}</Link></li>
+                    <button onClick={(e) => handleWantToWatch(movie)}>X</button>
                   </ul>
                 )
               } else return null

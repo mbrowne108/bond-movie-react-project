@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MovieCard from './MovieCard.js'
 
-function MovieContainer({movies, onUpdateWant, onUpdateWatch}) {
+function MovieContainer({ movies, onUpdateMovie }) {
   const [filteredActor, setFilteredActor] = useState('')
   const [filteredDecade, setFilteredDecade] = useState(0)
 
@@ -12,6 +12,9 @@ function MovieContainer({movies, onUpdateWant, onUpdateWatch}) {
   function handleDecadeChange(e) {
     setFilteredDecade(Number(e.target.value))
   }
+
+  const filteredMovies = movies.filter((movie) => filteredActor === movie.bond || filteredActor === "")
+    .filter((movie) => filteredDecade === 0 || (filteredDecade <= movie.year && filteredDecade + 10 > movie.year))
 
   return (
     <div className="container">
@@ -33,18 +36,7 @@ function MovieContainer({movies, onUpdateWant, onUpdateWatch}) {
         <option value={2000}>2000's</option>
         <option value={2010}>2010's</option>
       </select><br/>
-      {movies.map((movie) =>
-        {const displayCard = <MovieCard key={movie.id} movie={movie} onUpdateWant={onUpdateWant} onUpdateWatch={onUpdateWatch} />
-        if (filteredDecade === 0 && filteredActor === "") {
-          return displayCard
-        } else if (movie.Bond === filteredActor && filteredDecade === 0) {
-          return displayCard
-        } else if (filteredActor === "" && filteredDecade <= movie.Year && filteredDecade + 10 > movie.Year) {
-          return displayCard
-        } else if (movie.Bond === filteredActor && filteredDecade <= movie.Year && filteredDecade + 10 > movie.Year) {
-          return displayCard
-        } else return null
-      })}
+      {filteredMovies.map((movie) => <MovieCard key={movie.id} movie={movie} onUpdateMovie={onUpdateMovie} />)}
     </div>
   );
 }

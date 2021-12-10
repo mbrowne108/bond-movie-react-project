@@ -1,56 +1,49 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useParams } from "react-router-dom";
 
-function MovieInfo({onUpdateWatch, onUpdateWant}) {
-  const [movie, setMovie] = useState([])
+function MovieInfo({ movies, onUpdateMovie }) {
   const { id } = useParams()
   
-  const handleWatched = useCallback(() => {
-    fetch(`http://localhost:3004/movies/${movie.id}`, {
+  function handleWatched() {
+    fetch(`http://localhost:3004/movies/${movies[id].id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        Watched: !movie.Watched
+        watched: !movies[id].watched
       }),
     })
       .then(r => r.json())
-      .then((updatedMovie) => onUpdateWatch(updatedMovie))
-  }, [movie.Watched, movie.id, onUpdateWatch])
+      .then((updatedMovie) => onUpdateMovie(updatedMovie))
+  }
 
-  const handleWantToWatch = useCallback(() => {
-    fetch(`http://localhost:3004/movies/${movie.id}`, {
+  function handleWantToWatch() {
+    fetch(`http://localhost:3004/movies/${movies[id].id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        Want_To_Watch: !movie.Want_To_Watch
+        want_to_watch: !movies[id].want_to_watch
       }),
     })
       .then(r => r.json())
-      .then((updatedMovie) => onUpdateWant(updatedMovie))
-  }, [movie.Want_To_Watch, movie.id, onUpdateWant])
-
-  useEffect(() => {
-    fetch(`http://localhost:3004/movies/${id}`)
-      .then(r => r.json())
-      .then(data => setMovie(data))
-  }, [id, handleWantToWatch, handleWatched])
+      .then((updatedMovie) => onUpdateMovie(updatedMovie))
+  }
 
   return (
     <div className="info-card">
-      <h2>{movie.Movie} ({movie.Year})</h2>
-      <h5>Starring {movie.Bond}</h5>
-      <h5>Directed by {movie.Director}</h5>
-      <h5>Written by {movie.Writer}</h5>
-      <h5>Music by {movie.Composer}</h5>
-      <h5>Rotten Tomatoes Score: {movie.Avg_User_Rtn_Tom * 10}%</h5>
-      <button className="button" onClick={handleWatched}>Watched? {movie.Watched ? '☑' : '☐'}</button>
-      <button className="button" onClick={handleWantToWatch}>Want to Watch? {movie.Want_To_Watch ? '☑' : '☐'}</button><br/>
-      {movie.Movie !== "Dr. No" ? <Link className="info-button" to={`/${movie.id - 1}`}>Previous Movie</Link> : null}
-      {movie.Movie !== "Spectre" ? <Link className="info-button" to={`/${movie.id + 1}`}>Next Movie</Link> : null}
+      <h2>{movies[id].movie} ({movies[id].year})</h2>
+      <h5>Starring {movies[id].bond}</h5>
+      <h5>Directed by {movies[id].director}</h5>
+      <h5>Written by {movies[id].writer}</h5>
+      <h5>Music by {movies[id].composer}</h5>
+      <h5>Rotten Tomatoes Score: {movies[id].avg_user_rtn_tom * 10}%</h5>
+      <button className="button" onClick={handleWatched}>Watched? {movies[id].watched ? '☑' : '☐'}</button>
+      <button className="button" onClick={handleWantToWatch}>Want to Watch? {movies[id].want_to_watch ? '☑' : '☐'}</button><br/>
+      {movies[id].Movie !== "Dr. No" ? <Link className="info-button" to={`/movies/${movies[id].id - 1}`}>Previous Movie</Link> : null}
+      {movies[id].Movie !== "Spectre" ? <Link className="info-button" to={`/movies/${movies[id].id + 1}`}>Next Movie</Link> : null}
     </div>
   );
 }
