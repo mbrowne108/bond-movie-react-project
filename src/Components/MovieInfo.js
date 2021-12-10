@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
 
 function MovieInfo({onUpdateWatch, onUpdateWant}) {
   const [movie, setMovie] = useState([])
   const { id } = useParams()
   
-  useEffect(() => {
-    fetch(`http://localhost:3004/movies/${id}`)
-      .then(r => r.json())
-      .then(data => setMovie(data))
-  },[id])
-
-  function handleWatched() {
+  const handleWatched = useCallback(() => {
     fetch(`http://localhost:3004/movies/${movie.id}`, {
       method: "PATCH",
       headers: {
@@ -22,10 +16,10 @@ function MovieInfo({onUpdateWatch, onUpdateWant}) {
       }),
     })
       .then(r => r.json())
-      .then((updatedMovie) => setMovie(updatedMovie))
-  }
+      .then((updatedMovie) => onUpdateWatch(updatedMovie))
+  }, [movie, onUpdateWatch])
 
-  function handleWantToWatch() {
+  const handleWantToWatch = useCallback(() => {
     fetch(`http://localhost:3004/movies/${movie.id}`, {
       method: "PATCH",
       headers: {
@@ -36,8 +30,14 @@ function MovieInfo({onUpdateWatch, onUpdateWant}) {
       }),
     })
       .then(r => r.json())
-      .then((updatedMovie) => setMovie(updatedMovie))
-  }
+      .then((updatedMovie) => onUpdateWant(updatedMovie))
+  }, [movie, onUpdateWant])
+
+  useEffect(() => {
+    fetch(`http://localhost:3004/movies/${id}`)
+      .then(r => r.json())
+      .then(data => setMovie(data))
+  }, [id, handleWantToWatch, handleWatched])
 
   return (
     <div className="info-card">

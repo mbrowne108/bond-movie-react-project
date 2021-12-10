@@ -39,6 +39,22 @@ body {
   color: #ff000d;
 }
 
+.container {
+  padding: 1rem;
+  height: auto;
+  background: #a4aac7;
+  opacity: 0.8;
+  text-align: center;
+  padding: 1rem;
+}
+
+.container select {
+  border-radius: 5px;
+  height: auto;
+  width: 8rem;
+  margin: 1rem 1rem;
+}
+
 .card {
   text-align: center;
   border: rgb(0, 0, 0) solid 1px;
@@ -51,6 +67,8 @@ body {
 }
 
 .info-card {
+  background: #a4aac7;
+  opacity: 0.8;
   justify-content: center;
   text-align: center;
   border: rgb(0, 0, 0) solid 1px;
@@ -63,6 +81,8 @@ body {
 
 .lists {
   border: rgb(0, 0, 0) solid 1px;
+  background: #a4aac7;
+  opacity: 0.8;
   padding: 1rem;
   width: 20rem;
   font-size: 18px;
@@ -70,6 +90,11 @@ body {
   display: inline-grid;
   margin: 2rem 2rem;
   box-shadow: 3px 4px #3b3b3b
+}
+
+.lists ul {
+  padding: 5px;
+  text-align: center;
 }
 
 .lists li {
@@ -97,22 +122,6 @@ body {
 button:hover {
   background-color: rgba(255, 255, 255, 0.74);
   color: #ff000d;
-}
-
-.container {
-  padding: 1rem;
-  height: auto;
-  background: #a4aac7;
-  opacity: 0.8;
-  text-align: center;
-  padding: 1rem;
-}
-
-.container select {
-  border-radius: 5px;
-  height: auto;
-  width: 8rem;
-  margin: 1rem 1rem;
 }
 
 .info-button {

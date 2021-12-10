@@ -2,7 +2,7 @@ import React from 'react';
 
 function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
   return (
-    <div>
+    <div className="container">
       <h2>Your Movie Lists</h2>
       <div className="lists">
         <h3>Have Seen</h3>
@@ -10,7 +10,7 @@ function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
             {movies.map((movie) => {
               if (movie.Watched) {
                 return (
-                  <div>
+                  <ul key={movie.id}>
                     <li>{movie.Movie}</li>
                     <button onClick={() => {
                       fetch(`http://localhost:3004/movies/${movie.id}`, {
@@ -25,7 +25,7 @@ function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
                         .then(r => r.json())
                         .then((updatedMovie) => onUpdateWatch(updatedMovie))
                     }}>X</button>
-                  </div>
+                  </ul>
                 )
               } else return null
             })}
@@ -37,7 +37,7 @@ function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
             {movies.map((movie) => {
               if (movie.Want_To_Watch) {
                 return (
-                  <div>
+                  <ul key={movie.id}>
                     <li>{movie.Movie}</li>
                     <button onClick={() => {
                       fetch(`http://localhost:3004/movies/${movie.id}`, {
@@ -52,7 +52,7 @@ function MovieLists({movies, onUpdateWant, onUpdateWatch}) {
                         .then(r => r.json())
                         .then((updatedMovie) => onUpdateWant(updatedMovie))
                     }}>X</button>
-                  </div>
+                  </ul>
                 )
               } else return null
             })}
