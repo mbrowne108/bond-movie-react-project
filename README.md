@@ -26,7 +26,4 @@ Open [http://localhost:3004/movies](http://localhost:3004/movies) to view the ra
 This app lists and organizes all James Bond films with options to filter by actor or decade. Clicking on each film from the main page routes to an info page for that film, displaying additional information from the server, such as the director, writer(s), composer, etc. Additionally, you can add any of these films to your own personalized "Watch" or "Want to Watch" lists.
 
 ### Demonstration Video
-[YouTube Link](https://youtu.be/tP0Unurrnts)
-
-### Example GIF
-![](example.gif)
+[YouTube Link](https://youtu.be/8kVQp_85IpI)
