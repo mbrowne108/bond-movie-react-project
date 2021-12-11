@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-function NewMovieForm({onNewMovie}) {
+function NewMovieForm({ onNewMovie }) {
   const [formData, setFormData] = useState({
       movie: "",
       year: 2021,
@@ -8,7 +8,7 @@ function NewMovieForm({onNewMovie}) {
       director: "",
       writer: "",
       composer: "",
-      avg_user_rtn_tom: 6.4,
+      avg_user_rtn_tom: 9.9,
       watched: false,
       want_to_watch: false
   })
@@ -38,8 +38,8 @@ function NewMovieForm({onNewMovie}) {
           <label>Starring <input type="text" name="bond" value={formData.bond} onChange={handleChange}/></label><br/>
           <label>Directed By <input type="text" name="director" value={formData.director} onChange={handleChange}/></label><br/>
           <label>Written By <input type="text" name="writer" value={formData.writer} onChange={handleChange}/></label><br/>
-          <label>Music By<input type="text" name="composer" value={formData.composer} onChange={handleChange}/></label><br/>
-          <input type="submit" value="submit"/>
+          <label>Music By <input type="text" name="composer" value={formData.composer} onChange={handleChange}/></label><br/><br/>
+          <input id="submit-button" type="submit" value="submit"/>
       </form>
     </div>
   );

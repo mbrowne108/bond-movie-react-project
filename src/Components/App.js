@@ -1,5 +1,5 @@
-import React, { useState, useEffect} from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import About from './About.js'
 import NavBar from './NavBar.js'
@@ -10,10 +10,13 @@ import NewMovieForm from './NewMovieForm.js'
 
 function App() {
   const [movies, setMovies] = useState([])
+  const history = useHistory()
 
-  function onNewMovie(newMovie) {
-    setMovies(...movies, newMovie)
-  }
+  useEffect(() => {
+    fetch('http://localhost:3004/movies')
+    .then(r => r.json())
+    .then(data => setMovies(data))
+  }, [])
 
   function onUpdateMovie(updatedMovie) {
     let updatedMovies = movies.map((movie) => {
@@ -25,12 +28,13 @@ function App() {
     })
     setMovies(updatedMovies)
   }
-
-  useEffect(() => {
-    fetch('http://localhost:3004/movies')
-    .then(r => r.json())
-    .then(data => setMovies(data))
-  },[])
+  
+  function onNewMovie(newMovie) {
+    const newMovieArray = [...movies, newMovie]
+    setMovies(newMovieArray)
+    alert("Your new movie has been added!")
+    history.push("/movies")
+  }
 
   return (
     <div>

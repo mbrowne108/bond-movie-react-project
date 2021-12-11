@@ -2,34 +2,20 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 function MovieLists({ movies, onUpdateMovie }) {
-  function handleWatched(movie) {
+  function handleUpdate(movie, e) {
     fetch(`http://localhost:3004/movies/${movie.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        watched: !movie.watched
+        [e.target.name]: !movie[e.target.name]
       }),
     })
       .then(r => r.json())
       .then((updatedMovie) => onUpdateMovie(updatedMovie))
   }
 
-  function handleWantToWatch(movie) {
-    fetch(`http://localhost:3004/movies/${movie.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        want_to_watch: !movie.want_to_watch
-      }),
-    })
-      .then(r => r.json())
-      .then((updatedMovie) => onUpdateMovie(updatedMovie))
-  }
-  
   return (
     <div className="container">
       <h2>Your Movie Lists</h2>
@@ -41,7 +27,7 @@ function MovieLists({ movies, onUpdateMovie }) {
                 return (
                   <ul key={movie.id}>
                     <li><Link to={`/movies/${movie.id}`}>{movie.movie}</Link></li>
-                    <button onClick={(e) => handleWatched(movie)}>X</button>
+                    <button name="watched" onClick={(e) => handleUpdate(movie, e)}>X</button>
                   </ul>
                 )
               } else return null
@@ -56,7 +42,7 @@ function MovieLists({ movies, onUpdateMovie }) {
                 return (
                   <ul key={movie.id}>
                     <li><Link to={`/movies/${movie.id}`}>{movie.movie}</Link></li>
-                    <button onClick={(e) => handleWantToWatch(movie)}>X</button>
+                    <button name="want_to_watch" onClick={(e) => handleUpdate(movie, e)}>X</button>
                   </ul>
                 )
               } else return null
