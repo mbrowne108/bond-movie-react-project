@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 function MovieInfo({ movies, onUpdateMovie }) {
   const { id } = useParams()
-  
+  console.log(movies.length, movies[id].id)
   function handleUpdate(e) {
     fetch(`http://localhost:3004/movies/${movies[id].id}`, {
       method: "PATCH",
@@ -29,7 +29,7 @@ function MovieInfo({ movies, onUpdateMovie }) {
       <button className="button" name="watched" onClick={handleUpdate}>Watched? {movies[id].watched ? '☑' : '☐'}</button>
       <button className="button" name="want_to_watch" onClick={handleUpdate}>Want to Watch? {movies[id].want_to_watch ? '☑' : '☐'}</button><br/>
       {movies[id].movie !== "Dr. No" ? <Link className="info-button" to={`/movies/${movies[id].id - 1}`}>Previous Movie</Link> : null}
-      {movies[id].movie !== "Spectre" ? <Link className="info-button" to={`/movies/${movies[id].id + 1}`}>Next Movie</Link> : null}
+      {movies[id].id + 1 !== movies.length ? <Link className="info-button" to={`/movies/${movies[id].id + 1}`}>Next Movie</Link> : null}
     </div>
   );
 }
