@@ -108,13 +108,9 @@ body {
   box-shadow: 3px 4px #3b3b3b
 }
 
-.lists ul {
-  padding: 5px;
-  text-align: center;
-}
-
 .lists li {
-  display: inline-block;
+  list-style-type: none;
+  text-align: left;
 }
 
 .lists button {

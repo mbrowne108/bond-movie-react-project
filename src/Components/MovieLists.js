@@ -24,12 +24,7 @@ function MovieLists({ movies, onUpdateMovie }) {
           <ul>
             {movies.map((movie) => {
               if (movie.watched) {
-                return (
-                  <ul key={movie.id}>
-                    <li><Link to={`/movies/${movie.id}`}>{movie.movie}</Link></li>
-                    <button name="watched" onClick={(e) => handleUpdate(movie, e)}>X</button>
-                  </ul>
-                )
+                return <li key={movie.id}><Link to={`/movies/${movie.id}`}>{movie.movie}</Link><button name="watched" onClick={(e) => handleUpdate(movie, e)}>X</button></li>
               } else return null
             })}
           </ul>
@@ -39,12 +34,7 @@ function MovieLists({ movies, onUpdateMovie }) {
           <ul>
             {movies.map((movie) => {
               if (movie.want_to_watch) {
-                return (
-                  <ul key={movie.id}>
-                    <li><Link to={`/movies/${movie.id}`}>{movie.movie}</Link></li>
-                    <button name="want_to_watch" onClick={(e) => handleUpdate(movie, e)}>X</button>
-                  </ul>
-                )
+                return <li key={movie.id}><Link to={`/movies/${movie.id}`}>{movie.movie}</Link><button name="want_to_watch" onClick={(e) => handleUpdate(movie, e)}>X</button></li>
               } else return null
             })}
           </ul>

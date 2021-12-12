@@ -16,6 +16,7 @@ function MovieCard({ movie, onUpdateMovie }) {
       .then((updatedMovie) => onUpdateMovie(updatedMovie))
   }
 
+
   return (
     <div className="card">
       <h4><Link to={`/movies/${movie.id}`}>{movie.movie}</Link></h4>

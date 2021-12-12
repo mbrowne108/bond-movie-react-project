@@ -28,8 +28,8 @@ function MovieInfo({ movies, onUpdateMovie }) {
       <h5>Rotten Tomatoes Score: {movies[id].avg_user_rtn_tom * 10}%</h5>
       <button className="button" name="watched" onClick={handleUpdate}>Watched? {movies[id].watched ? '☑' : '☐'}</button>
       <button className="button" name="want_to_watch" onClick={handleUpdate}>Want to Watch? {movies[id].want_to_watch ? '☑' : '☐'}</button><br/>
-      {movies[id].Movie !== "Dr. No" ? <Link className="info-button" to={`/movies/${movies[id].id - 1}`}>Previous Movie</Link> : null}
-      {movies[id].Movie !== "Spectre" ? <Link className="info-button" to={`/movies/${movies[id].id + 1}`}>Next Movie</Link> : null}
+      {movies[id].movie !== "Dr. No" ? <Link className="info-button" to={`/movies/${movies[id].id - 1}`}>Previous Movie</Link> : null}
+      {movies[id].movie !== "Spectre" ? <Link className="info-button" to={`/movies/${movies[id].id + 1}`}>Next Movie</Link> : null}
     </div>
   );
 }

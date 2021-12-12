@@ -19,7 +19,7 @@ function App() {
   }, [])
 
   function onUpdateMovie(updatedMovie) {
-    let updatedMovies = movies.map((movie) => {
+    const updatedMovies = movies.map((movie) => {
       if (movie.id === updatedMovie.id) {
         return updatedMovie
       } else {
@@ -56,6 +56,9 @@ function App() {
           </Route>
           <Route path="/lists">
             <MovieLists movies={movies} onUpdateMovie={onUpdateMovie} />
+          </Route>
+          <Route path="*">
+            <h1>404 Not Found</h1>
           </Route>
         </Switch>
       </header>
