@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 function MovieInfo({ movies, onUpdateMovie }) {
   const { id } = useParams()
-  console.log(movies.length, movies[id].id)
+  
   function handleUpdate(e) {
     fetch(`http://localhost:3004/movies/${movies[id].id}`, {
       method: "PATCH",
